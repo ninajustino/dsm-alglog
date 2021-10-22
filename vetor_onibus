@@ -1,0 +1,231 @@
+// Construção de um programa que gerencie a gestão de vendas de passagens para ônibus rodoviário (viagens)
+//Informações sobre a identificação do ônibus
+// 1 – Destino
+// 2 – Número do ônibus
+// 3 – Valor da passagem
+
+//Informações a serem oferecidas sobre a ocupação do ônibus
+// 1 – Total de poltronas reservadas
+// 2 – Total de poltronas disponíveis
+// 3 – Receita total bruta com as poltronas reservadas
+// 4 – Total de operações de cancelamento realizadas
+
+//Opções a serem disponibilizadas para a boa gestão de vendas de passagens.
+// 1 – Reservar
+// 2 – Cancelar
+// 3 – Listagem de Ocupações / Disponibilidade
+// 4 – Listagem Geral
+// 5 – Resumo de Ocupação
+// 9 – Finalizar
+
+// Trabalho em dupla: Fernanda Cristina e Marina Justino
+
+programa
+{
+	inclua biblioteca Matematica --> m
+	inclua biblioteca Util --> u
+
+	
+	inteiro numero_onibus, opcao
+	real valor_passagem
+	inteiro nrOnibus, capacidade = 40, countCancel = 0, countReserva = 0
+	real vrPassagem
+	cadeia destino, poltrona [40], poltrona_reservada [40]
+	
+	funcao inicio()
+	{
+		
+		
+		caracter continua
+
+		
+
+		faca
+		{
+			limpa ()
+			identificacao()
+			reserva_poltrona ()
+			menu ()
+			
+			
+//perguntar se continua a execução do programa
+			escreva("\nContinua a Execução do Programa? ")
+			leia (continua)
+
+		}
+		enquanto (continua == 'S' ou continua == 's')
+		escreva("\nO programa foi finalizado!!!")
+	}
+
+	
+		funcao identificacao ()
+		{
+		escreva("*** Reserva de Passagens de Ônibus ***\n \n")
+
+		escreva ("----------------------------------------------------------------------\n")
+		escreva ("   FRANCA/SP - Nº104 / RIBEIRÃO PRETO/SP - Nº103 / PASSOS/MG Nº105    \n")
+		escreva ("----------------------------------------------------------------------\n")
+		
+		escreva("\nInforme o número do ônibus: ")
+		leia (numero_onibus)
+		
+		escolha (numero_onibus) 
+			{
+
+				caso 104:
+					escreva("\nO destino escolhido foi: FRANCA/SP")
+					escreva("\nO número do ônibus é...: 104")
+					escreva("\nO valor da passagem é..: R$ 85,00\n\n")
+					pare
+				caso 103:
+					escreva("\nO destino escolhido foi: RIBEIRÃO PRETO/SP")
+					escreva("\nO número do ônibus é...: 103")
+					escreva("\nO valor da passagem é..: R$ 110,00\n\n")
+					pare					
+				caso 105:
+					escreva("\nO destino escolhido foi: PASSOS/MG")
+					escreva("\nO número do ônibus é...: 105")
+					escreva("\nO valor da passagem é..: R$ 150,00\n\n")				
+					pare										
+																					
+				caso contrario:
+					escreva("Opção Inválida")
+
+			
+
+			}
+		   }
+		
+
+		funcao reserva_poltrona ()
+		{
+			 inteiro f, c, fila, coluna, reservas = 0, onibus[4][10]
+
+    para(f = 0; f < 4; f++){
+      para(c = 0; c < 10; c++){
+        onibus[f][c] = 0
+      }
+    }
+
+    faca{
+      escreva("\n*** Reserva de Poltronas ***\n \n")
+      escreva("*COLUNAS*\n\n")
+      escreva("0  1  2  3  4  5  6  7  8  9  *FILAS*\n\n")
+      para(f = 0; f < 4; f++){
+        para(c = 0; c < 10; c++){
+          escreva(onibus[f][c], "  ")
+        }
+        escreva("   ", f, "\n")
+      }
+  
+      escreva("\nDigite a fila e a coluna correspondentes à poltrona desejada: ")
+      leia(fila, coluna)
+  
+      se(fila < 0 ou fila > 3){
+        escreva("\nFila inválida. Digite outra fila válida.\n")
+      }
+      senao{
+        se(coluna < 0 ou coluna > 9){
+          escreva("\nColuna inválida. Digite outra coluna válida.\n")
+        }
+        senao{
+          se(onibus[fila][coluna] == 1){
+            escreva("\nPoltrona já reservada. Por gentileza, escolha outra poltrona.\n")
+          }
+          senao{
+            onibus[fila][coluna] = 1
+            escreva("\nReserva realizada com sucesso!\n")
+            reservas++
+          }
+        }
+      }
+    }enquanto(reservas < 750 e fila >= 0 ou coluna >= 0)
+
+		
+		}
+		funcao menu ()
+		{
+			escreva("\n==== Escolha uma opção para prosseguir ====\n")
+			
+			escreva("\n 1) Reservar acento")
+			escreva("\n 2) Cancelar reserva")
+			escreva("\n 3) Lista de ocupações e disponibilidades")			   
+			escreva("\n 4) Resumo Geral")			   
+			escreva("\n 5) Resumo de Ocupações")
+			escreva("\n 9) Finalizar\n")
+
+			escreva("\n Opção: ")
+			leia (opcao)
+
+			/*escolha (opcao) 
+			{
+
+				caso 1:
+					Reservar
+					pare
+				caso 2:
+					Cancelar
+					pare					
+				caso 3:
+					Ocupacao_Disponibilidade					
+					pare										
+				caso 4:
+					Listagem_Geral
+					pare															
+				caso 5:					
+					Resumo_Ocupacao
+					pare								
+				caso 9:	
+					Finalizar				
+					pare																				
+				caso contrario:
+					escreva("Opção Inválida")
+		   }
+		
+          }
+
+         funcao Reservar ()
+         {
+		         	escreva("=== RESERVAR POLTRONA ===\n")
+		
+		
+				inteiro reserva
+		
+				escreva ("\nInforme a Poltrona:")
+				leia (reserva)
+		
+				se (reserva >= 1 e reserva <= 40 e poltronaReservada [reserva-1] != "1")
+				{
+					poltronaReservada [reserva-1] = "1"
+					countReserva += 1			
+					escrever ("Poltrona reservada! \n")
+				} senao {
+					escreva ("Esta poltrona não está disponivel, escolha outra!\n")	
+				}
+		
+         }
+
+	    funcao Cancelar ()
+         {
+         	
+         }
+
+         funcao Ocupacao_Disponibilidade ()
+         {
+         	
+         }
+         funcao Listagem_Geral ()
+         {
+         	
+         }
+         funcao Resumo_Ocupacao ()
+         {
+         	
+         }
+         funcao Finalizar ()
+         { */
+         	
+         } 
+  	}
+
+		
